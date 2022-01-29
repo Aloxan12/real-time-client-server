@@ -1,20 +1,23 @@
 const express = require('express')
-const PORT = process.env.PORT || 5000
 const authRouter = require('./authRouter')
-const mongoose = require('mongoose')
+const PORT = process.env.PORT || 6000
+
+const mongoose = require('mongoose');
+// mongoose.connect('mongodb://localhost:27017/auth_rolse', {useNewUrlParser: true, useUnifiedTopology: true});
 
 
 const app = express()
 
-app.use(express.json)
-app.use('/auth', authRouter)
+app.use(express.json())
+app.use("/auth", authRouter)
 
-const start = async ()=>{
-    try{
-        await mongoose.connect(`mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&directConnection=true&ssl=false`)
-        app.listen(PORT, ()=>console.log('connect 5000 port'))
-    }catch (e) {
-        
+const start = async () => {
+    try {
+        await mongoose.connect('mongodb://localhost:27017/auth_rolse', {useNewUrlParser: true, useUnifiedTopology: true});
+        app.listen(PORT, () => console.log(`server started on port ${PORT}`))
+    } catch (e) {
+        console.log(e)
+        console.log('uuuu')
     }
 }
 
