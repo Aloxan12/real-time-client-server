@@ -27,7 +27,7 @@ class authController {
             }
             const hashPassword = bcrypt.hashSync(password, 7);
             const userRole = await Role.findOne({value: "USER"})
-            const user = new User({username, password: hashPassword, roles: [userRole.value]})
+            const user = new User({username, password: hashPassword, roles: "USER"})
             await user.save()
             return res.json({message: "Пользователь успешно зарегистрирован"})
         } catch (e) {
@@ -57,15 +57,10 @@ class authController {
 
     async getUsers(req, res) {
         try {
-            const user = new Role()
-            const admin = new Role({value: 'ADMIN'})
-            await user.save()
-            await admin.save()
-            // const users = await User.find()
-            // console.log('nen')
-            // res.json(users)
+            const users = await User.find()
+            console.log('nen')
+            res.json(users)
         } catch (e) {
-
             console.log(e)
         }
     }

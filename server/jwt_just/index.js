@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const authRouter = require('./authRouter')
 
 const PORT = 9000;
-const DB_URL = `mongodb://localhost:27017/`
+const DB_URL = `mongodb://localhost:27017/auth`
 
 const app = express()
 
@@ -17,7 +17,7 @@ const dbConnect = async () =>{
     try{
         await mongoose.connect(DB_URL, {useUnifiedTopology: true, useNewUrlParser: true})
     } catch (e) {
-        console.log('error catch')
+        console.log('error  catch')
     }
 }
 
