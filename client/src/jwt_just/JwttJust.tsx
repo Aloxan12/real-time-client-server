@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './JwttJust.css'
 import axios from "axios";
 
@@ -107,5 +107,16 @@ export const Login = () => {
                 </div>
             </div>
         </div>
+    )
+}
+
+
+export const Users =()=>{
+    const [users, setUsers] = useState([])
+    useEffect(()=>{
+        axios.get('http://localhost:9000/api/users').then(res => console.log(res))
+    },[])
+    return(
+        <div>{users.map((item: any) => <span>{item.name}</span>)}</div>
     )
 }
