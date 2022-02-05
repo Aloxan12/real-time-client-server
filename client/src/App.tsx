@@ -7,6 +7,7 @@ import {Login, Registration, Users} from "./jwt_just/JwttJust";
 function App() {
   return (
     <div className="App">
+        <Registration />
         <Users />
     </div>
   );
