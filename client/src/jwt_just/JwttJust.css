@@ -67,3 +67,9 @@
     color: red;
     font-weight: 500;
 }
+.success-text{
+    max-width: 90%;
+    margin-top: 7px;
+    color: #0fbe0f;
+    font-weight: 500;
+}

@@ -7,6 +7,7 @@ export const Registration = () => {
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
     const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -20,7 +21,15 @@ export const Registration = () => {
             await axios.post('http://localhost:9000/api/registration',{
                 username: name,
                 password: password
-            })
+            }).then((res)=> {
+                if(res.status === 200){
+                    setSuccess("Пользователь успешно зарегистрирован")
+                }else if(res.status === 400){
+                    console.log('tut')
+                }else {
+                    setError('При регистрации произошла ошибка')
+                }
+            }).catch((e)=> setError('При регистрации произошла ошибка'))
         }
     };
 
@@ -34,6 +43,7 @@ export const Registration = () => {
 
                         <input type="text" value={name} placeholder="Введите свое имя" onChange={(e) => {
                             setError('')
+                            setSuccess('')
                             setName(e.currentTarget.value)
                         }} name="name"/>
                     </div>
@@ -41,6 +51,7 @@ export const Registration = () => {
                         <label htmlFor="password">Введите пароль:</label>
                         <input type="password" value={password} placeholder="Введите пароль" onChange={(e)=>{
                             setError('')
+                            setSuccess('')
                             setPassword(e.currentTarget.value)
                         }} name="password"/>
                     </div>
@@ -48,12 +59,14 @@ export const Registration = () => {
                         <label htmlFor="password2">Введите еще раз пароль:</label>
                         <input type="password" name="password2" value={password2} placeholder="Введите ещё раз пароль" onChange={(e)=>{
                             setError('')
+                            setSuccess('')
                             setPassword2(e.currentTarget.value)
                         }}/>
                     </div>
                     <div className="form-item btn-block">
                         <input type="submit" className="btn" value="Зарегестрироваться"/>
                         {error && <div className="error-text">{error}</div>}
+                        {success && <div className="success-text">{success}</div>}
                     </div>
                 </form>
             </div>
